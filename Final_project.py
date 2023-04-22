@@ -1,18 +1,6 @@
 
-# Questions to ask:
-# (Is it a G rated movie?)
-# Is it released before 2000?
-# Is it longer than two hours?
-# Is it an Action Genre?
-# Is is a Comedy Genre?
-# Is it a Drama Genre?
-
-
-# we put multiple data in a leaf node. Every time it reaches a leaf node, we will pop out a movie series randomly.
-# we can't capture the movie data directly. It has to be stored in a cache before we can proceed with the seraching tree.
-
-#load 100 movies:
-# helper funcitons:
+##This is the main code of the function. User can run this program for testing purposes.
+## The tree is created using the default json file.
 from tree import printTree
 import json
 import re
@@ -70,7 +58,7 @@ def load_play(tree,json,ans):
     text, left, right = tree
     if isLeaf(tree):
         # add the json object into the list
-        text.append((json))
+        text.append((json["Title"],json["Rated"],json["Plot"],json["Poster"]))
         return tree
     else:
         if len(ans)>0:
@@ -142,10 +130,10 @@ def play(tree):
             if len(text)<=5:
                 for i in range(len(text)):
                     print(f'movie {i+1}:')
-                    print(text[i]["Title"])
-                    print("Rated: ", text[i]["Rated"])
-                    print("Poster Link: ", text[i]["Poster"])
-                    print(text[i]["Plot"])
+                    print(text[i][0])
+                    print("Rated: ", text[i][1])
+                    print("Poster Link: ", text[i][3])
+                    print(text[i][2])
                     print("")
             
             else:
@@ -154,10 +142,10 @@ def play(tree):
                 while yes(prompt):
                     for j in range(5):
                         print(f'movie {j+1}:')
-                        print(text[rand_num[j]]["Title"])
-                        print("Rated: ", text[rand_num[j]]["Rated"])
-                        print("Poster Link: ", text[rand_num[j]]["Poster"])
-                        print(text[rand_num[j]]["Plot"])
+                        print(text[rand_num[j]][0])
+                        print("Rated: ", text[rand_num[j]][1])
+                        print("Poster Link: ", text[rand_num[j]][2])
+                        print(text[rand_num[j]][3])
                         print("")
                     prompt = input("Would you like to look for another set of recommendation? ")
         return tree
@@ -172,6 +160,7 @@ def play(tree):
 
 if __name__ == '__main__':
     movieTree = loadTree()
+    #printTree(movieTree)
     prompt = "yes"# default
     while yes(prompt):
         movieTree = play(movieTree)
