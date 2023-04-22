@@ -1,0 +1,5 @@
+Internal node
+Is it a G-rated movie?Internal node
+Is it an Animation?Internal node
+Is it a comedy movie?Leaf node
+Leaf node
